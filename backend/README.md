@@ -1,0 +1,35 @@
+# Közösségi szolgálat WEBAPP
+## (KSZA)
+
+- [x] Login rendszer
+  - [x] AlreadyLoggedIn
+  - [x] Password verification 
+  - [x] Email verification
+  - [x] User verification (Login)
+  - [x] Logout
+  - [x] Session elindítása
+  - [x] Session törlése logoutkor
+  - [ ] Session IDLE limit megadása. (6 óra a maximális fenttartható session time!)
+  - [ ] Jelszó visszaállítás
+  - [ ] Response helyes megírása
+  - [X] Errorok kezelése
+- [x] Regisztrációs rendszer
+  - [X] AlreadyLoggedIn
+  - [X] Password verification
+  - [X] Email verification
+  - [X] Duplikált email esetén nem enged regisztrálni
+  - [ ] Session elindítása (Egyből login) (?)
+  - [ ] Email check (Email kiküldése, verify mezőbe visszakérés majd elfogadás és csak utánna regelés)
+  - [X] Response helyes megírása
+- [] Admin
+  - [ ] Admin route a backendben
+  - [ ] Admin middleware
+  - [ ] Admin adatbázis szerkezet kigondolása/megvalósítása
+- [ ] Tanár
+  - [ ] Tanár route a backendben
+  - [ ] Tanár middleware
+  - [ ] Tanár adatbázis szerkezet kigondolása/megvalósítása
+- [ ] Diák
+  - [ ] Diák route a backendben
+  - [ ] Diák middleware
+  - [ ] Diák adatbázis szerkezet kigondolása/megvalósítása
