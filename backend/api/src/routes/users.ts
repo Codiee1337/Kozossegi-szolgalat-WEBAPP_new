@@ -11,7 +11,7 @@ const router = Router()
 router.get('/users/getUserList', auth, catchAsync(async(req,res,next)=>{
 
     if(req.session.role!='Admin'){
-        throw new NotAdmin()
+        throw new NotAdmin("Nem vagy admin!")
     }
 
     const users = await User.find({})

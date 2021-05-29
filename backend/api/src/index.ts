@@ -4,12 +4,16 @@ import Redis from 'ioredis'
 import session from 'express-session'
 import connectRedis from 'connect-redis'
 import { hostname } from 'os'
-import { REDIS_OPTIONS, APP_PORT, MONGO_URI, MONGO_OPTIONS } from './config'
+import { REDIS_OPTIONS, APP_PORT, MONGO_URI, MONGO_OPTIONS, IP_BIND } from './config'
 import { createApp } from './app'
 
 ;(async () => {
     
-await mongoose.connect(MONGO_URI, MONGO_OPTIONS)
+await mongoose.connect(MONGO_URI, MONGO_OPTIONS).catch(err=>{
+console.log(err)
+
+})
+
 
 const RedisStore = connectRedis(session)
 
@@ -21,6 +25,6 @@ const app = createApp(store);
 
 
 
-app.listen(APP_PORT, () => console.log('It works!'))
+app.listen(5000, IP_BIND, () => console.log('It works!'))
 })()
 

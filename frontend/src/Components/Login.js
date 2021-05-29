@@ -1,36 +1,43 @@
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import {Grid} from "@material-ui/core"
 import classes from "./Login.module.css"
-import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { logIn } from '../Actions/Login'
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 export default function Login(props) {
     const dispatch = useDispatch()
-    const [email,setEmail] = useState()
-    const [password,setPassword] = useState()
-    const loginInfo = useSelector(state => state.loginInfo)
+    const [email,setEmail] = useState("")
+    const [password,setPassword] = useState("")
+    const loginInfo= useSelector(state => state.loginInfo)
 
-    /*const {error} = useSelector(state => state.loginInfo)
-    useEffect(()=>{
-        console.log(error)
-    },[error])*/
+    /*if(loginInfo){
+        props.history.push('/')
+    }*/
 
-    const logInHandler=(e)=>{
+    const logInHandler=(e)=>{       
         e.preventDefault()
-        dispatch(logIn(email,password))
+        dispatch(logIn(email,password)) 
     }
 
+    
+
+
     return (
+        <div>
         <Grid container className={classes.Login}>
-           <Grid md={3} item>
+           <Grid lg={3} md={5} xs={10} item className={classes.LoginBox}>
+               <LockOpenIcon className={classes.Icon}></LockOpenIcon>
                 <h1>Log in to your account</h1>
                 <div className={classes.TextFields}>
-                    <input type="text" onChange={(t)=>setEmail(t.target.value)} placeholder="email"></input>
-                    <input type="password" onChange={(t)=>setPassword(t.target.value)} placeholder="password"></input>
+                    <input type="text" style={loginInfo&&loginInfo.error?{color:"#ec4646"}:{color:"black"}} onChange={(t)=>setEmail(t.target.value)} placeholder="email"></input>
+                    <input type="password" style={loginInfo&&loginInfo.error?{color:"#ec4646"}:{color:"black"}} onChange={(t)=>setPassword(t.target.value)} placeholder="password"></input>
                 </div>
+               
+                {loginInfo&&loginInfo.error&&Array.isArray(loginInfo.error)?loginInfo.error.map((entry)=><h3 key={entry} className={classes.error}>{entry}</h3>):loginInfo&&loginInfo.error&&<h3 className={classes.error}>{loginInfo.error}</h3>}
                 <input type="button" className={classes.button} onClick={logInHandler} value="Login"></input>
            </Grid>
         </Grid>
+        </div>
     )
 }

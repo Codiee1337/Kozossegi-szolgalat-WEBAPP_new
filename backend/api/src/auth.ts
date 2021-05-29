@@ -19,6 +19,7 @@ export const logIn = (req: Request, userId: string, role: string)=>{
 
 }
 
+
 export const logOut = (req: Request, res: Response) =>
   new Promise<void>((resolve, reject) => {
     req.session!.destroy((err: Error) => {

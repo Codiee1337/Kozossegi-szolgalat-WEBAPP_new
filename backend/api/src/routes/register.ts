@@ -17,7 +17,7 @@ router.post('/register', guest, catchAsync(async (req,res) =>{
     const found = await User.exists({email})
 
     if(found){
-        throw new InvalidEmail()
+        throw new InvalidEmail("Nem megfelelő email!")
     }
 
     const user = await User.create({

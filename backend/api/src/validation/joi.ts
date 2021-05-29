@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import joi, { ExtensionFactory, Root, StringSchema, ObjectSchema } from '@hapi/joi'
-import { BadRequest } from '../errors'
+import joi, { ExtensionFactory, Root, StringSchema, ObjectSchema, ValidationError } from '@hapi/joi'
+import { ValidationErrorCustom } from '../errors'
 
 const objectId: ExtensionFactory = joi => ({
   type: 'objectId',
@@ -25,6 +25,14 @@ export const validate = async (schema: ObjectSchema, payload: any) => {
   try {
     await schema.validateAsync(payload, { abortEarly: false })
   } catch (e) {
-    throw new BadRequest(e)
-  }
+    let errors: Array<string> = []
+    
+    const arraylength = e.length;
+    await e.details.map((entry, i, arr)=>{
+      
+      errors.push(entry.message)
+    })
+  
+      throw new ValidationErrorCustom(errors)
+    }
 }

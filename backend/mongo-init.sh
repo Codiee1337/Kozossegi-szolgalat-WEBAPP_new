@@ -1,8 +1,8 @@
 mongo -- "$MONGO_INITDB_DATABASE" << EOF
 db.createUser({
-    user: "$MONGO_USERNAME",
-    pwd: "$MONGO_PASSWORD",
+    user: "admin",
+    pwd: "secret",
     roles:[
-        {role: 'readWrite',db:"$MONGO_INITDB_DATABASE"}
+        {role: 'readWrite',db:"auth"}
     ]
 })
