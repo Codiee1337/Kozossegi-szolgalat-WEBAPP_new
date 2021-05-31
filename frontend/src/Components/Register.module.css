@@ -45,7 +45,7 @@
 }
 .error{
     color: #fff;
-    background-color: #ec4646;
+    background-color: #21cbff;
     font-size: 16px;
     padding: 10px;
     border-radius: 5px;
@@ -61,7 +61,7 @@
     margin-top: 15px;
     border:none;
     padding: 10px;
-    background-color: #ec4646;
+    background-color: #21cbff;
     color: white;
     font-size: 20px;
     border-radius: 15px;

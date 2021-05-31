@@ -14,6 +14,7 @@ console.log(err)
 
 })
 
+mongoose.set('useFindAndModify', false);
 
 const RedisStore = connectRedis(session)
 

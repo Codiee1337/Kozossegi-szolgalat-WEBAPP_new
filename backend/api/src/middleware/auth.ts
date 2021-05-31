@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { isLoggedIn } from '../auth'
+import { nextTick } from "process";
+import { isLoggedIn} from '../auth'
 import { AlreadyLoggedIn, NotLoggedIn } from "../errors";
 
 export const guest = (req: Request, res: Response, next: NextFunction) => {
@@ -21,3 +22,4 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
     next()
 
 }
+

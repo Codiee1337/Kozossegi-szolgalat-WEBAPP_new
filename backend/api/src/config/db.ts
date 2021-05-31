@@ -4,7 +4,7 @@ import { ConnectionOptions } from 'mongoose'
 const {
     MONGO_USERNAME = 'admin',
     MONGO_PASSWORD = 'secret',
-    MONGO_HOST = '192.168.0.4',
+    MONGO_HOST = '192.168.0.2',
     MONGO_PORT = 27017,
     MONGO_DATABASE = 'auth'
 

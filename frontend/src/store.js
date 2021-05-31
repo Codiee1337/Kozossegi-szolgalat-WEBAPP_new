@@ -1,16 +1,19 @@
 import {applyMiddleware, combineReducers, createStore,compose} from "redux"
 import thunk from 'redux-thunk'
-import { register } from "./Actions/Register"
-import { LogInReducer } from "./Reducers/LogInReducer"
-import { RegisterReducer } from "./Reducers/RegisterReducer"
+
+import { UserReducer } from "./Reducers/UserReducer"
+
 
 const initialState = {
-    loginInfo: localStorage.getItem('loginInfo')?JSON.parse(localStorage.getItem('loginInfo')):null
+    userData: localStorage.getItem('userData')?JSON.parse(localStorage.getItem('userData')):null
 }
 
 const reducer = combineReducers({
-    loginInfo:LogInReducer,
-    loginInfo:RegisterReducer
+    
+    userData: UserReducer
+        
+        
+    
 })
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(reducer,initialState,composeEnhancer(applyMiddleware(thunk)))

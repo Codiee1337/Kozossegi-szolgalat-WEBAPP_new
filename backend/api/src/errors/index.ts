@@ -11,7 +11,7 @@ abstract class HttpError extends Error {
     }
   }
   
-  
+
 
   export class InvalidEmail extends HttpError {
     constructor (message) {
@@ -49,5 +49,13 @@ export class NotAdmin extends HttpError {
     super(message)
     this.message = JSON.stringify(message)
     this.status = 500.5
+  }
+}
+
+export class NotFound extends HttpError {
+  constructor (message) {
+    super(message)
+    this.message = JSON.stringify(message)
+    this.status = 404
   }
 }

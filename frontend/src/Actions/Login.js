@@ -1,60 +1,62 @@
 import axios from "axios"
-import {LOG_IN_REQUEST,LOG_IN_FAIL,LOG_IN_SUCCESS, LOG_OUT_REQUEST, LOG_OUT_FAIL, LOG_OUT_SUCCESS} from "../Constants/Login"
+import {USERINFO_FAIL, USERINFO_SUCCESS, USERINFO_REMOVE, USERINFO_REQUEST} from "../Constants/User"
 
 export const logIn = (email,password) => async(dispatch) =>{
     
-    if(!localStorage.getItem("loginInfo") === null){
-        window.location = "/";
-    }
+    
     let userData
-    dispatch({type:LOG_IN_REQUEST})
+    dispatch({type:USERINFO_REQUEST})
     try {
         await axios.post("/login",{email,password}).then((res)=>{
             
             userData = res.data
-            localStorage.setItem('loginInfo',JSON.stringify(userData))
-            dispatch({type:LOG_IN_SUCCESS,payload:userData})
-        
-        }).catch((err)=>{
-            
-            dispatch({type:LOG_IN_FAIL,error:JSON.parse(err.response.data.message)})
-            
-            //console.log(err.response.data.message)
+            localStorage.setItem('userData',JSON.stringify(userData))
+            dispatch({type:USERINFO_SUCCESS,payload:userData})
         
         })
         
-    } catch (error) {
-        if(error&&error.response&&error.response.data){
-            dispatch({type:LOG_IN_FAIL,error:JSON.parse('['+error.response.data.message+']')})
+    } catch (err) {
+        if(err&&err.response&&err.response.data){
+            
+            dispatch({type:USERINFO_FAIL,error:JSON.parse(err.response.data.message)})
         }else{
-            console.log(error.message)
-           dispatch({type:LOG_IN_FAIL,error:error.message})
+            
+           dispatch({type:USERINFO_FAIL,error:JSON.parse(err.response.data.message)})
         }
        
     }
+
+    if(localStorage.getItem('userData')!=null){
+        window.location = '/'
+    }
+
 }
 
 export const logOut = () => async(dispatch)=>{
-    console.log('logoutdispatch')
-    dispatch({type:LOG_OUT_REQUEST})
+    //console.log('logoutdispatch')
+    dispatch({type:USERINFO_REQUEST})
     try {
         axios.post('/logout').then((res)=>{
 
-            dispatch({type:LOG_OUT_SUCCESS})
+            dispatch({type:USERINFO_REMOVE})
             //console.log(res)
-            localStorage.removeItem('loginInfo')
+            localStorage.removeItem('userData')
+
+            if(localStorage.getItem('userData')===null){
+                console.log("userData nem letezik")
+                window.location = '/'
+            }
 
         }).catch((err)=>{
             
             console.log(err)
             
-        }).finally((res)=>{
-
-            window.location = "/login";
-
         })
         
     } catch (error) {
-           dispatch({type:LOG_IN_FAIL,error:error.message})
+           dispatch({type:USERINFO_REQUEST,error:error.message})
     }
+
+    
+
 }

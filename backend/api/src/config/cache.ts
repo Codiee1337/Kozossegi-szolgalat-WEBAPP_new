@@ -3,7 +3,7 @@ import { hostname } from 'os'
 
 const {
 REDIS_PORT = 6379,
-REDIS_HOST = '192.168.0.4',
+REDIS_HOST = '192.168.0.2',
 REDIS_PASSWORD = 'secret'
 
 } = process.env
